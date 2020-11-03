@@ -1,40 +1,26 @@
 const express = require("express");
-const mysql = require("mysql");
-
-// Create DB connection
-const db = mysql.createConnection({
-    host     : 'mysql.cs02noukcnjb.us-east-2.rds.amazonaws.com',
-    user     : 'admin',
-    password : 'Test!123',
-    database : 'demo'
-});
-
-// Connect DB
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log(`MySQL Connected`)
-});
-
-
+const bodyParser = require("body-parser");
+const pool = require("./database");
+const router = require("./routes/router");
 
 const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+
+// Initialize routes
+app.use('/api', router);
+
+// Error handling middleware
+app.use(function(err, req, res, next){
+    console.log(err); // to see properties of message in our console
+    // res.status(422).send({error: err.message});
+    res.send({error: err.message});
+});
 
 app.listen('3000', () => {
     console.log(`Server started on port 3000`)
 });
-
-
-// Create table
-// URL: HOST:PORT/createtable/?tablename=xxxxx
-app.get(`/createtable/`, (req, res) => {
-    console.log(req.query)
-    let sql = `CREATE TABLE ${req.params.tablename} (id int AUTO_INCREMENT, ${req.params.tablename}_title VARCHAR(255), contents VARCHAR(255), PRIMARY KEY (id))`
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.send(`${req.params.tablename} table created.`)
-    })
-})
-

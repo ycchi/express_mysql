@@ -12,13 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Initialize routes
-app.use('/api', router);
+app.use('/', router);
 
 // Error handling middleware
 app.use(function(err, req, res, next){
     console.log(err); // to see properties of message in our console
-    // res.status(422).send({error: err.message});
-    res.send({error: err.message});
+    res.status(422).send({error: err.message});
 });
 
 app.listen('3000', () => {

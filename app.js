@@ -1,4 +1,10 @@
 const express = require("express");
+const session = require('express-session')
+const jwt = require('jsonwebtoken');
+// handles multipart/form-data for uploading files
+const multer  = require('multer');
+const bodyParser = require('body-parser');
+
 const bodyParser = require("body-parser");
 const pool = require("./database");
 const router = require("./routes/router");

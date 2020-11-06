@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const multer  = require('multer');
 const bodyParser = require('body-parser');
 
-const bodyParser = require("body-parser");
 const pool = require("./database");
 const router = require("./routes/router");
 

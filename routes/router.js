@@ -3,6 +3,15 @@ const router = express.Router();
 // const pool = require("../database");
 const knex = require("../db");
 
+// Router Imports //
+const orgsRouter = require('./orgs');
+const suborgsRouter = require('./suborgs');
+const facilitiesRouter = require('./facilities');
+
+// Router Names //
+router.use('/orgs', orgsRouter);
+router.use('/suborgs', suborgsRouter);
+router.use('/facilities', facilitiesRouter);
 
 // GET ALL Todo's
 // url: host:port/api/getallfacilities

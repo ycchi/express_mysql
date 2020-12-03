@@ -24,6 +24,61 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
 --
+-- Table structure for table `facilities`
+--
+
+DROP TABLE IF EXISTS `facilities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `facilities` (
+  `facilityId` int NOT NULL AUTO_INCREMENT,
+  `facilityName` varchar(45) NOT NULL,
+  `suborgId` int DEFAULT NULL,
+  `orgId` int DEFAULT NULL,
+  `coordinate` point DEFAULT NULL,
+  PRIMARY KEY (`facilityId`),
+  KEY `suborgId_idx` (`suborgId`),
+  KEY `orgId_idx` (`orgId`) /*!80000 INVISIBLE */,
+  CONSTRAINT `suborgId` FOREIGN KEY (`suborgId`) REFERENCES `suborganization` (`suborgId`)
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `facilities`
+--
+
+LOCK TABLES `facilities` WRITE;
+/*!40000 ALTER TABLE `facilities` DISABLE KEYS */;
+INSERT INTO `facilities` VALUES (1,'Jet Propulsion Lab',5,2,_binary '\0\0\0\0\0\0\0v/œ‹]À\"jG\ÕA@'),(2,'Kennedy Space Center',5,2,_binary '\0\0\0\0\0\0\0\0\0\0\à¤)TÀ\0\0\0 –<@'),(3,'Langley Research Center',4,2,_binary '\0\0\0\0\0\0\0ù\çX”\ÈSÀ\0ú\"FŒB@'),(4,'Armstrong Flight Research Center',4,2,_binary '\0\0\0\0\0\0\0º“™ˆx]À¤ö\Ç zA@'),(5,'Stennis Space Center',4,2,_binary '\0\0\0\0\0\0\0\Ò!\Ë\ÝBfVÀ`³·\ï¬`>@');
+/*!40000 ALTER TABLE `facilities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `organization`
+--
+
+DROP TABLE IF EXISTS `organization`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `organization` (
+  `orgId` int NOT NULL AUTO_INCREMENT,
+  `orgName` varchar(45) DEFAULT NULL,
+  `totalFacilities` int DEFAULT NULL,
+  PRIMARY KEY (`orgId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `organization`
+--
+
+LOCK TABLES `organization` WRITE;
+/*!40000 ALTER TABLE `organization` DISABLE KEYS */;
+INSERT INTO `organization` VALUES (1,'DHS',NULL),(2,'NASA',7),(3,'NRC',NULL);
+/*!40000 ALTER TABLE `organization` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `suborganization`
 --
 
@@ -61,4 +116,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-03 10:16:31
+-- Dump completed on 2020-12-03 10:22:59

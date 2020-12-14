@@ -7,11 +7,13 @@ const knex = require("../db");
 const orgsRouter = require('./orgs');
 const suborgsRouter = require('./suborgs');
 const facilitiesRouter = require('./facilities');
+const uploadRouter = require('./upload');
 
 // Router Names //
 router.use('/orgs', orgsRouter);
 router.use('/suborgs', suborgsRouter);
 router.use('/facilities', facilitiesRouter);
+router.use('/upload', uploadRouter)
 
 // GET ALL Todo's
 // url: host:port/api/getallfacilities

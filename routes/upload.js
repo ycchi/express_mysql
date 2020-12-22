@@ -16,18 +16,6 @@ const upload = multer({
 }).single(`file`)
 
 
-// '/upload/'
-// router.post('/', (req, res) => {
-//     upload(req, res, (err) => {
-//         if (err instanceof multer.MulterError) {
-//             console.log(`multer Error: ${err}`)
-//         } else if (err) {
-//             console.log(` Error: ${err}`)
-//         }
-//         res.status(201).send(`successfully uploaded file`)
-//     })
-// })
-
 
 // 12/11 - destination err
 router.post('/', upload, (req, res, next) => {
